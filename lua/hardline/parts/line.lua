@@ -15,7 +15,7 @@ end
 local function get_column()
   local nbcol = fn.col('$') - 1
   local col = fn.col('.')
-  return fmt('%s%d/%s%d', pad(col, 100), col, pad(nbcol, 100), nbcol)
+  return fmt('%s%d', pad(col, 100), col)
 end
 
 local function get_percent()
@@ -26,7 +26,7 @@ local function get_percent()
 end
 
 local function get_item()
-  return table.concat({get_line(), get_column(), get_percent()}, ' ')
+  return get_column()
 end
 
 return {
