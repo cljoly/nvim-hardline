@@ -5,17 +5,17 @@ local M = {}
 
 M.modes = {
   ['?'] = {text = '???', state = 'inactive'},
-  ['n'] = {text = 'NORMAL', state = 'normal'},
-  ['i'] = {text = 'INSERT', state = 'insert'},
-  ['R'] = {text = 'REPLACE', state = 'replace'},
-  ['v'] = {text = 'VISUAL', state = 'visual'},
-  ['V'] = {text = 'V-LINE', state = 'visual'},
-  [''] = {text = 'V-BLOCK', state = 'visual'},
-  ['c'] = {text = 'COMMAND', state = 'command'},
-  ['s'] = {text = 'SELECT', state = 'visual'},
-  ['S'] = {text = 'S-LINE', state = 'visual'},
-  [''] = {text = 'S-BLOCK', state = 'visual'},
-  ['t'] = {text = 'TERMINAL', state = 'command'},
+  ['n'] = {text = 'NOR', state = 'normal'},
+  ['i'] = {text = 'INS', state = 'insert'},
+  ['R'] = {text = 'REP', state = 'replace'},
+  ['v'] = {text = 'VIS', state = 'visual'},
+  ['V'] = {text = 'V-L', state = 'visual'},
+  [''] = {text = 'V-B', state = 'visual'},
+  ['c'] = {text = 'COM', state = 'command'},
+  ['s'] = {text = 'SEL', state = 'visual'},
+  ['S'] = {text = 'S-L', state = 'visual'},
+  [''] = {text = 'S-B', state = 'visual'},
+  ['t'] = {text = 'TER', state = 'command'},
 }
 
 function M.echo(hlgroup, msg)
