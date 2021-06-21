@@ -15,7 +15,7 @@ end
 local function get_column()
   local nbcol = fn.col('$') - 1
   local col = fn.col('.')
-  return fmt('%s%d', pad(col, 100), col)
+  return fmt('%s%d', pad(col, 10), col)
 end
 
 local function get_percent()
