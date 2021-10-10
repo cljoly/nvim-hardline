@@ -19,7 +19,7 @@ local function get_spell()
   if not wo.spell then
     return ''
   end
-  return fmt('SPELL[%s]', string.upper(bo.spelllang))
+  return fmt('SPL[%s]', string.upper(bo.spelllang))
 end
 
 local function get_item()
