@@ -26,7 +26,7 @@ local function check_mix_indent()
   local tst = [[(^\t* +\t\s*\S)]]
   local tls = fmt([[(^\t+ {%d,}\S)]], bo.tabstop)
   local pattern = fmt([[\v%s|%s]], tst, tls)
-  return search('mix-indent', pattern)
+  return search('MX', pattern)
 end
 
 local function check_mix_indent_file()
@@ -39,7 +39,7 @@ local function check_mix_indent_file()
   if indent_tabs == 0 or indent_spc == 0 then
     return ''
   end
-  return fmt('[mix-indent-file:%d,%d]', indent_spc, indent_tabs)
+  return fmt('[MXF:%d,%d]', indent_spc, indent_tabs)
 end
 
 local function check_conflict()
@@ -49,7 +49,7 @@ local function check_conflict()
     raw_pattern = [[^\%%(\%%(<\{7} %s\)\|\%%(>\{7\} %s\)\)$]]
   end
   local pattern = fmt(raw_pattern, annotation, annotation)
-  return search('conflict', pattern)
+  return search('CT', pattern)
 end
 
 local function get_item()
@@ -71,7 +71,7 @@ local function get_item()
     check_trailing(),
     check_mix_indent(),
     check_mix_indent_file(),
-    check_conflict(),
+    -- check_conflict(),
   })
   return cache
 end
