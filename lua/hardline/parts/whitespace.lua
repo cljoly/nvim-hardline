@@ -19,7 +19,7 @@ local function search(prefix, pattern)
 end
 
 local function check_trailing()
-  return search('trailing', [[\s$]])
+  return search('T', [[\s$]])
 end
 
 local function check_mix_indent()
