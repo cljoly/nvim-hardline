@@ -2,18 +2,19 @@ local fmt = string.format
 local M = {}
 
 M.modes = {
+  [''] = {text = 'S-BLOCK', state = 'visual'},
+  [''] = {text = 'V-BLOCK', state = 'visual'},
   ['?'] = {text = '???', state = 'inactive'},
-  ['n'] = {text = 'NOR', state = 'normal'},
-  ['i'] = {text = 'INS', state = 'insert'},
-  ['R'] = {text = 'REP', state = 'replace'},
-  ['v'] = {text = 'VIS', state = 'visual'},
-  ['V'] = {text = 'V-L', state = 'visual'},
-  [''] = {text = 'V-B', state = 'visual'},
-  ['c'] = {text = 'COM', state = 'command'},
-  ['s'] = {text = 'SEL', state = 'visual'},
-  ['S'] = {text = 'S-L', state = 'visual'},
-  [''] = {text = 'S-B', state = 'visual'},
-  ['t'] = {text = 'TER', state = 'command'},
+  ['R'] = {text = 'REPLACE', state = 'replace'},
+  ['S'] = {text = 'S-LINE', state = 'visual'},
+  ['V'] = {text = 'V-LINE', state = 'visual'},
+  ['c'] = {text = 'COMMAND', state = 'command'},
+  ['i'] = {text = 'INSERT', state = 'insert'},
+  ['n'] = {text = 'NORMAL', state = 'normal'},
+  ['r'] = {text = 'PROMPT', state = 'replace'},
+  ['s'] = {text = 'SELECT', state = 'visual'},
+  ['t'] = {text = 'TERMINAL', state = 'command'},
+  ['v'] = {text = 'VISUAL', state = 'visual'},
 }
 
 function M.echo(msg, hlgroup)
