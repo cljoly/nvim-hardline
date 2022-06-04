@@ -23,6 +23,10 @@ local function get_modified()
 end
 
 local function get_item()
+  -- Quickfix window support
+  if vim.w.quickfix_title then
+    return '%t ' .. vim.w.quickfix_title
+  end
   local name = get_name()
   local flags = table.concat({get_readonly(), get_modified()})
   if flags ~= '' then
