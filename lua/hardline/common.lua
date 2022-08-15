@@ -2,8 +2,8 @@ local fmt = string.format
 local M = {}
 
 M.modes = {
-  [''] = {text = 'S-BLOCK', state = 'visual'},
-  [''] = {text = 'V-BLOCK', state = 'visual'},
+  [''] = {text = 'S-B', state = 'visual'},
+  [''] = {text = 'V-B', state = 'visual'},
   ['?'] = {text = '???', state = 'inactive'},
   ['R'] = {text = 'REP', state = 'replace'},
   ['S'] = {text = 'S-L', state = 'visual'},
