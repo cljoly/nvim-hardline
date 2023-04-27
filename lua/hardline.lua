@@ -3,9 +3,6 @@
 -- github.com/ojroques
 
 -------------------- VARIABLES -----------------------------
-local fn, cmd, vim = vim.fn, vim.cmd, vim
-local g, o, wo = vim.g, vim.o, vim.wo
-local fmt = string.format
 local common = require('hardline.common')
 local bufferline = require('hardline.bufferline')
 local custom_colors = require('hardline.themes.custom_colors')
@@ -94,7 +91,7 @@ local function remove_empty_sections(sections)
 end
 
 local function load_sections(sections)
-  function load_section(section)
+  local function load_section(section)
     if type(section) == 'string' then
       return section
     end
@@ -142,7 +139,7 @@ local function get_section_state(section, is_active)
 end
 
 local function highlight_sections(sections, is_active)
-  function highlight_section(section)
+  local function highlight_section(section)
     if type(section) ~= 'table' then
       return section
     end
