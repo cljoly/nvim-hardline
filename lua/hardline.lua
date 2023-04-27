@@ -4,7 +4,6 @@
 
 -------------------- VARIABLES -----------------------------
 local common = require("hardline.common")
-local bufferline = require("hardline.bufferline")
 local fmt = string.format
 local M = {}
 
@@ -218,6 +217,7 @@ end
 function M.update_bufferline()
   local sections = {}
   local settings = M.options.bufferline_settings
+  local bufferline = require("hardline.bufferline")
   local buffers = bufferline.get_buffers(settings)
   for i, buffer in ipairs(buffers) do
     table.insert(sections, bufferline.to_section(buffer, i, settings))
