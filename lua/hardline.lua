@@ -3,8 +3,8 @@
 -- github.com/ojroques
 
 -------------------- VARIABLES -----------------------------
-local common = require('hardline.common')
-local bufferline = require('hardline.bufferline')
+local common = require("hardline.common")
+local bufferline = require("hardline.bufferline")
 local fmt = string.format
 local M = {}
 
@@ -12,36 +12,84 @@ local M = {}
 M.options = {
   bufferline = false,
   bufferline_settings = {
-      exclude_terminal = false,
-      show_index = false,
-      separator = '|',
+    exclude_terminal = false,
+    show_index = false,
+    separator = "|",
   },
-  theme = 'default',
+  theme = "default",
   sections = {
-    {class = 'mode', item = function() require('hardline.parts.mode').get_item() end},
-    {class = 'high', item = function() require('hardline.parts.git').get_item() end, hide = 100},
-    {class = 'med', item = function() require('hardline.parts.filename').get_item() end},
-    '%<',
-    {class = 'med', item = '%='},
-    {class = 'low', item = function() require('hardline.parts.wordcount').get_item() end, hide = 100},
-    {class = 'error', item = function() require('hardline.parts.lsp').get_error() end},
-    {class = 'warning', item = function() require('hardline.parts.lsp').get_warning() end},
-    {class = 'warning', item = function() require('hardline.parts.whitespace').get_item() end},
-    {class = 'high', item = function() require('hardline.parts.filetype').get_item() end, hide = 60},
-    {class = 'mode', item = function() require('hardline.parts.line').get_item() end},
+    {
+      class = "mode",
+      item = function()
+        require("hardline.parts.mode").get_item()
+      end,
+    },
+    {
+      class = "high",
+      item = function()
+        require("hardline.parts.git").get_item()
+      end,
+      hide = 100,
+    },
+    {
+      class = "med",
+      item = function()
+        require("hardline.parts.filename").get_item()
+      end,
+    },
+    "%<",
+    { class = "med", item = "%=" },
+    {
+      class = "low",
+      item = function()
+        require("hardline.parts.wordcount").get_item()
+      end,
+      hide = 100,
+    },
+    {
+      class = "error",
+      item = function()
+        require("hardline.parts.lsp").get_error()
+      end,
+    },
+    {
+      class = "warning",
+      item = function()
+        require("hardline.parts.lsp").get_warning()
+      end,
+    },
+    {
+      class = "warning",
+      item = function()
+        require("hardline.parts.whitespace").get_item()
+      end,
+    },
+    {
+      class = "high",
+      item = function()
+        require("hardline.parts.filetype").get_item()
+      end,
+      hide = 60,
+    },
+    {
+      class = "mode",
+      item = function()
+        require("hardline.parts.line").get_item()
+      end,
+    },
   },
   custom_theme = {
-    text = {gui = "NONE", cterm = "NONE", cterm16 = "NONE"},
-    normal = {gui = "NONE", cterm = "NONE", cterm16 = "NONE"},
-    insert = {gui = "NONE", cterm = "NONE", cterm16 = "NONE"},
-    replace = {gui = "NONE", cterm = "NONE", cterm16 = "NONE"},
-    inactive_comment = {gui = "NONE", cterm = "NONE", cterm16 = "NONE"},
-    inactive_cursor = {gui = "NONE", cterm = "NONE", cterm16 = "NONE"},
-    inactive_menu = {gui = "NONE", cterm = "NONE", cterm16 = "NONE"},
-    visual = {gui = "NONE", cterm = "NONE", cterm16 = "NONE"},
-    command = {gui = "NONE", cterm = "NONE", cterm16 = "NONE"},
-    alt_text = {gui = "NONE", cterm = "NONE", cterm16 = "NONE"},
-    warning = {gui = "NONE", cterm = "NONE", cterm16 = "NONE"},
+    text = { gui = "NONE", cterm = "NONE", cterm16 = "NONE" },
+    normal = { gui = "NONE", cterm = "NONE", cterm16 = "NONE" },
+    insert = { gui = "NONE", cterm = "NONE", cterm16 = "NONE" },
+    replace = { gui = "NONE", cterm = "NONE", cterm16 = "NONE" },
+    inactive_comment = { gui = "NONE", cterm = "NONE", cterm16 = "NONE" },
+    inactive_cursor = { gui = "NONE", cterm = "NONE", cterm16 = "NONE" },
+    inactive_menu = { gui = "NONE", cterm = "NONE", cterm16 = "NONE" },
+    visual = { gui = "NONE", cterm = "NONE", cterm16 = "NONE" },
+    command = { gui = "NONE", cterm = "NONE", cterm16 = "NONE" },
+    alt_text = { gui = "NONE", cterm = "NONE", cterm16 = "NONE" },
+    warning = { gui = "NONE", cterm = "NONE", cterm16 = "NONE" },
   },
 }
 
@@ -58,13 +106,13 @@ M.options = {
 local function aggregate_sections(sections)
   local aggregated, piv = {}, 1
   while piv <= #sections do
-    if type(sections[piv]) == 'table' then
+    if type(sections[piv]) == "table" then
       local items = {}
       for j = piv, #sections + 1 do
         if j == #sections + 1 or sections[j].class ~= sections[piv].class then
           table.insert(aggregated, {
             class = sections[piv].class,
-            item = fmt(' %s ', table.concat(items, ' ')),
+            item = fmt(" %s ", table.concat(items, " ")),
           })
           piv = j
           break
@@ -81,30 +129,30 @@ end
 
 local function remove_empty_sections(sections)
   local filter = function(section)
-    if type(section) == 'table' then
-      return section.item ~= ''
+    if type(section) == "table" then
+      return section.item ~= ""
     end
-    return section ~= ''
+    return section ~= ""
   end
   return vim.tbl_filter(filter, sections)
 end
 
 local function load_sections(sections)
   local function load_section(section)
-    if type(section) == 'string' then
+    if type(section) == "string" then
       return section
     end
-    if type(section) == 'function' then
+    if type(section) == "function" then
       return section()
     end
-    if type(section) == 'table' then
+    if type(section) == "table" then
       return {
-        class = section.class or 'none',
+        class = section.class or "none",
         item = load_section(section.item),
       }
     end
-    common.echo('Invalid section', 'WarningMsg')
-    return ''
+    common.echo("Invalid section", "WarningMsg")
+    return ""
   end
   return vim.tbl_map(load_section, sections)
 end
@@ -118,39 +166,39 @@ end
 
 -------------------- SECTION HIGHLIGHTING ------------------
 local function get_section_state(section, is_active)
-  if section.class == 'mode' then
+  if section.class == "mode" then
     if is_active then
-      local mode = common.modes[vim.fn.mode()] or common.modes['?']
+      local mode = common.modes[vim.fn.mode()] or common.modes["?"]
       return mode.state
     end
   end
-  if section.class == 'bufferline' then
+  if section.class == "bufferline" then
     if section.separator then
-      return 'separator'
+      return "separator"
     end
-    local state = section.current and 'current' or 'background'
+    local state = section.current and "current" or "background"
     if section.modified then
-      state = fmt('%s_modified', state)
+      state = fmt("%s_modified", state)
     end
     return state
   end
-  return is_active and 'active' or 'inactive'
+  return is_active and "active" or "inactive"
 end
 
 local function highlight_sections(sections, is_active)
   local function highlight_section(section)
-    if type(section) ~= 'table' then
+    if type(section) ~= "table" then
       return section
     end
-    if section.class == 'none' then
+    if section.class == "none" then
       return section.item
     end
     local state = get_section_state(section, is_active)
-    local hlgroup = fmt('Hardline_%s_%s', section.class, state)
+    local hlgroup = fmt("Hardline_%s_%s", section.class, state)
     if vim.fn.hlexists(hlgroup) == 0 then
       return section.item
     end
-    return fmt('%%#%s#%s%%*', hlgroup, section.item)
+    return fmt("%%#%s#%s%%*", hlgroup, section.item)
   end
   return vim.tbl_map(highlight_section, sections)
 end
@@ -182,7 +230,7 @@ end
 
 -------------------- SETUP -----------------------------
 local function set_theme()
-  if type(M.options.theme) ~= 'string' then
+  if type(M.options.theme) ~= "string" then
     return
   end
   local theme = fmt("hardline.themes.%s", M.options.theme)
@@ -192,13 +240,13 @@ end
 local function set_hlgroups()
   for class, attr in pairs(M.options.theme) do
     for state, args in pairs(attr) do
-      local hlgroup = fmt('Hardline_%s_%s', class, state)
+      local hlgroup = fmt("Hardline_%s_%s", class, state)
       local a = {}
       for k, v in pairs(args) do
-        table.insert(a, fmt('%s=%s', k, v))
+        table.insert(a, fmt("%s=%s", k, v))
       end
-      a = table.concat(a, ' ')
-      vim.cmd(fmt('autocmd VimEnter,ColorScheme * hi %s %s', hlgroup, a))
+      a = table.concat(a, " ")
+      vim.cmd(fmt("autocmd VimEnter,ColorScheme * hi %s %s", hlgroup, a))
     end
   end
 end
@@ -222,7 +270,7 @@ end
 
 function M.setup(user_options)
   if user_options then
-    M.options = vim.tbl_extend('force', M.options, user_options)
+    M.options = vim.tbl_extend("force", M.options, user_options)
   end
   set_theme()
   set_hlgroups()
