@@ -5,7 +5,6 @@
 -------------------- VARIABLES -----------------------------
 local common = require('hardline.common')
 local bufferline = require('hardline.bufferline')
-local custom_colors = require('hardline.themes.custom_colors')
 local fmt = string.format
 local M = {}
 
@@ -186,12 +185,8 @@ local function set_theme()
   if type(M.options.theme) ~= 'string' then
     return
   end
-  if M.options.theme == 'custom' then
-    M.options.theme = custom_colors.set(M.options.custom_theme)
-  else
-    local theme = fmt('hardline.themes.%s', M.options.theme)
-    M.options.theme = require(theme)
-  end
+  local theme = fmt("hardline.themes.%s", M.options.theme)
+  M.options.theme = require(theme)
 end
 
 local function set_hlgroups()
