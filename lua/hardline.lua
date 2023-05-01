@@ -3,7 +3,6 @@
 -- github.com/ojroques
 
 -------------------- VARIABLES -----------------------------
-local common = require("hardline.common")
 local fmt = string.format
 local M = {}
 
@@ -150,7 +149,7 @@ local function load_sections(sections)
         item = load_section(section.item),
       }
     end
-    common.echo("Invalid section", "WarningMsg")
+    require("hardline.common").echo("Invalid section", "WarningMsg")
     return ""
   end
   return vim.tbl_map(load_section, sections)
@@ -167,7 +166,7 @@ end
 local function get_section_state(section, is_active)
   if section.class == "mode" then
     if is_active then
-      local mode = common.modes[vim.fn.mode()] or common.modes["?"]
+      local mode = require("hardline.common").modes[vim.fn.mode()] or require("hardline.common").modes["?"]
       return mode.state
     end
   end
